@@ -140,7 +140,7 @@ Check [examples](examples/) folder showing how to call ColorVideoVDP from Python
 
 Unlike most image quality metrics, ColorVideoVDP needs physical specification of the display (e.g. its size, resolution, peak brightness) and viewing conditions (viewing distance, ambient light) to compute accurate predictions. The specifications of the displays are stored in [vvdp_data/display_models.json](pycvvdp/vvdp_data/display_models.json). You can add the exact specification of your display to this file, or create a new JSON file and pass the directory it is located in as `--config-paths` parameter (see [Configuration files](#configuration-files)). If the display specification is unknown to you, you are encouraged to use one of the standard display specifications listed on the top of that file, for example `standard_4k`, or `standard_fhd`. If you use one of the standard displays, there is a better chance that your results will be comparable with other studies. 
 
-You specify the display by passing `--display` argument to `cvvdp`. Run with `--display ?` to get a list of available display models. 
+You specify the display by passing `--display` t to `cvvdp`. Run with `--display ?` to get a list of available display models. 
 
 Note the the specification in `display_models.json` is for the display and not the image. If you select to use `standard_4k` with the resolution of 3840x2160 for your display and pass a 1920x1080 image, the metric will assume that the image occupies one quarter of that display (the central portion). If the image resolution happens to be larger than the display resolution, it will *not* be cropped and instead ColorVideoVDP will assume a larger display. If you want to enlarge (or shrink) the image to the full resolution of the display, pass `--full-screen-resize {fast_bilinear,bilinear,bicubic,lanczos}` option (for now it works with video only). 
 
@@ -263,7 +263,7 @@ You can also alternative versions of this debug "metric":
 
 ## Interactive mode
 
-`cvvdp` will need to initialize PyTorch every time it starts, which will lead to a significant slow down when evaluating many files. To avoid this slowdown, you can start `cvvdp` in interactive mode by passing `--interactive` argument. When started that way, each line on the standard input should contain a complete list of argumens, as you would pass them to `cvvdp` program (but without the `cvvdp`). For example: 
+`cvvdp` will need to initialize PyTorch every time it starts, which will lead to a significant slow down when evaluating many files. To avoid this slowdown, you can start `cvvdp` in interactive mode by passing `--interactive` argument. When started that way, each line on the standard input should contain a complete list of arguments, as you would pass them to `cvvdp` program (but without the `cvvdp`). For example: 
 ```bash
 > cvvdp --interactive
 --test example_media/aliasing/ferris-bicubic-bicubic.mp4 --ref example_media/aliasing/ferris-ref.mp4 --display "standard_fhd"
